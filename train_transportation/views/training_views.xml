@@ -1,0 +1,123 @@
+<odoo>
+  <!-- Membuat View Tree/List Course -->
+
+  <record id="train_transportation_view_tree" model="ir.ui.view">
+    <field name="name">train.transportation.tree</field>
+    <field name="model">train.transportation</field>
+    <field name="arch" type="xml">
+      <tree string="Transportation List">
+        <field name="name"/>
+        <field name="user_id"/>
+        <field name="description"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- Membuat View Form Course -->
+
+  <record id="train_transportation_view_form" model="ir.ui.view">
+    <field name="name">train.transportation.form</field>
+    <field name="model">train.transportation</field>
+    <field name="arch" type="xml">
+      <form string="Transportation Form">
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="user_id"/>
+          </group>
+          <notebook>
+            <page string="Schedule">
+              <field name="session_line" mode="tree,kanban" nolabel="1">
+                <tree string="Schedule" editable="bottom">
+                  <field name="name"/>
+                  <field name="partner_id"/>
+                  <field name="start_date"/>
+                  <field name="seats"/>
+                </tree>
+              </field>
+            </page>
+            <page string="Kota">
+              <group>
+                <field name="description"/>
+              </group>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+ <!-- Membuat Action Course --> 
+
+  <record id="train_transportation_action" model="ir.actions.act_window">
+    <field name="name">Transportation</field>
+    <field name="res_model">train.transportation</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+      <p name="o_view_nocontent_smiling_face">
+        Buatlah transportasi pertamamu ...
+      </p>
+    </field>
+  </record>
+
+  <record id="train_schedule_view_tree" model="ir.ui.view">
+    <field name="name">train.schedule.tree</field>
+    <field name="model">train.schedule</field>
+    <field name="arch" type="xml">
+      <tree string="schedule List">
+        <field name="course_id"/>
+        <field name="name"/>
+        <field name="partner_id"/>
+        <field name="start_date"/>
+        <field name="seats"/>
+      </tree>
+    </field>
+  </record>
+
+
+  <record id="train_schedule_view_form" model="ir.ui.view">
+    <field name="name">train.schedule.form</field>
+    <field name="model">train.schedule</field>
+    <field name="arch" type="xml">
+      <form string="Schedule Form">
+        <sheet>
+          <group>
+            <group string="Informasi">
+              <field name="course_id"/>
+              <field name="name"/>
+              <field name="partner_id"/>
+            </group>
+            <group string="Jadwal">
+              <field name="start_date"/>
+              <field name="seats"/>
+            </group>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  
+  
+  <record id="train_schedule_action" model="ir.actions.act_window">
+    <field name="name">Schedule</field>
+    <field name="res_model">train_schedule</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <!-- Membuat Menu Dashboard -->
+
+  <menuitem id="menu_dashboard_train" name="Train Transportation"/>
+
+  <!-- Membuat Menu Bar Training -->
+
+  <menuitem id="menu_bar_train" name="Train" parent="menu_dashboard_train"/>
+
+  <!-- Membuat Menu Item Course -->
+
+  <menuitem id="menu_item_train_transportation" name="Train" parent="menu_bar_train"
+  action="train_transportation_action"/>
+
+  <menuitem id="menu_item_train_schedule" name="Schedule" parent="menu_bar_train"
+  action="train_schedule_action"/>
+
+</odoo>
